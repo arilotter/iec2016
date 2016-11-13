@@ -57,3 +57,8 @@ train_schedules = {
         [0.2, 0.0, 0.8],
     ],
 }
+
+def to_time(minutes):
+    hour = minutes // 60
+    minutes = minutes % 60
+    return "%s:%s" % (hour, str(minutes).zfill(2))
