@@ -88,7 +88,7 @@ var path = svg.append('g').selectAll('path')
 var circle = svg.append('g').selectAll('circle')
     .data(force.nodes())
     .enter().append('circle')
-    .attr('r', 12)
+    .attr('r', 9)
     .call(force.drag);
 
 var text = svg.append('g').selectAll('text')
