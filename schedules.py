@@ -1,4 +1,3 @@
-
 """
 	The train schedules are stored in a dictionary, accessible by train[line] where line is a single character representing the line the train is on ('A', 'B', 'C', 'D', 'E')
 	Each schedule is a list of probability values. Every entry in the schedule list represents one hour's worth of schedules, starting at 9am.
