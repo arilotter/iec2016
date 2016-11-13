@@ -90,9 +90,10 @@ def get_optimal_routes(start, end):
     fastest = sorted(all_routes, key=get_time)[0]
 
     for time in range(0, 8):
-        time_routes = get_cost(0, all_routes)
+        time_routes = get_cost(time, all_routes)
         print(time_routes)
-        cheapest_route.append(sorted(time_routes, key=lambda x:x['cost']))
+        #cheapest_route.append(sorted(time_routes, key=itemgetter("cost")))
+        cheapest_route.append(sorted(time_routes, key=lambda x:x['cost'])[0])
 
 
 
@@ -102,8 +103,11 @@ def get_time(route):
 
 
 def get_cost(time, route):
+    paths = []
     for full_path in route:
         path_cost = 0
         for index, partial_path in enumerate(full_path[:-1]):
             path_cost += graph[partial_path][full_path[index+1]](time)
-        return {"cost": path_cost, "path": full_path}
+
+        paths.append({"cost": path_cost, "path": full_path})
+    return paths
