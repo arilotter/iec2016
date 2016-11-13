@@ -49,11 +49,17 @@ graph = {
 	}
 }
 
-def get_route(start, end):
-	pass
+def get_optimal_routes(start, end):
+	get_all_routes(start, end)
+	shortest_route = None
+	cheapest_route = None
+	return {
+		'shortest': shortest_route,
+		'cheapest': cheapest_route
+	}
 
 def get_time(route):
-	pass
+	return 
 
 def get_cost(route):
 	pass
