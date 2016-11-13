@@ -1,33 +1,59 @@
-import schedules
+from schedules import costs, train_schedules
+from functools import partial
 
-print(schedules.trainA)
+def probability_cost(line, time):
+	[sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for hour in train_schedules[line]]
+	
 
-def trainA(time):
-	return 3
+train = {
+	line: partial(probability_cost, line) for line in train_schedules
+}
 
-def trainB(time):
-	return 2
-
-def trainC(time):
-	return 0
-
-def walk(time):
-	return 0
+# No cost to walk this edge of the graph
+walk = lambda: 0
 
 graph = {
-	'START': [['JUNCTION_1', walk],
-	'JUNCTION_1': {
-		'JUNCTION_2': trainB,
-		'JUNCTION_4': trainA
+	'START': {
+		'JUNC_1': walk,
 	},
-	'JUNCTION_2': {
+	'JUNC_1': {
+		'JUNC_2': train['B'],
+		'JUNC_4': train['A'],
+	},
+	'JUNC_2': {
 		'END': walk,
-		'JUNCTION_5': trainB,
-		'JUNCTION_3': trainE
+		'JUNC_3': train['E'],
+		'JUNC_5': train['B'],
 	},
-	'JUNCTION_3': {
-		'JUNCTION_5': {
-
-		}
+	'JUNC_3': {
+		'LOC_1': walk,
+		'JUNC_4': train['B'],
+		'JUNC_5': train['D'],
+	},
+	'JUNC_4': {
+		'JUNC_5': train['C'],
+		'JUNC_6': train['B'],
+		'JUNC_7': train['A'],
+	},
+	'JUNC_5': {
+		'LOC_2': walk,
+		'JUNC_3': train['B'],
+	},
+	'JUNC_6': {
+		'LOC_3': walk,
+		'JUNC_1': train['B'],
+	},
+	'JUNC_7': {
+		'LOC_4': walk,
+		'JUNC_3': train['A'],
 	}
 }
+
+def get_route(start, end):
+	pass
+
+def get_time(route):
+	pass
+
+def get_cost(route):
+	pass
