@@ -82,24 +82,23 @@ def find_all_routes(graph, start, end, route=[]):
 
 def get_optimal_routes(start, end):
     all_routes = find_all_routes(graph, start, end)
-    #print(all_routes)
-    shortest_route = None
     cheapest_route = []
 
     #Optimize for time
     fastest = sorted(all_routes, key=get_time)[0]
 
+    #Optimize for cheap
     for time in range(0, 8):
         time_routes = get_cost(time, all_routes)
-        print(time_routes)
-        #cheapest_route.append(sorted(time_routes, key=itemgetter("cost")))
         cheapest_route.append(sorted(time_routes, key=lambda x:x['cost'])[0])
+
+    return {"fastest": fastest, "cheapest": cheapest_route}
 
 
 
 
 def get_time(route):
-    return sum([0 if node == 'START' or node == 'END' else 1 for node in route])
+    return sum([0 if node == 'START' or node == 'END' else 1 for node in route[:-1]])
 
 
 def get_cost(time, route):
@@ -109,5 +108,5 @@ def get_cost(time, route):
         for index, partial_path in enumerate(full_path[:-1]):
             path_cost += graph[partial_path][full_path[index+1]](time)
 
-        paths.append({"cost": path_cost, "path": full_path})
+        paths.append({"cost": path_cost, "time": get_time(full_path), "path": full_path})
     return paths
