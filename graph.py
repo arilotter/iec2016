@@ -2,14 +2,15 @@ from schedules import costs, train_schedules
 from functools import partial
 
 def probability_cost(line, time):
-    return [sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for probabilities in train_schedules[line]]
+    cost = [2.00, 3.00, 4.00]
+    return train_schedules[line][time][0] * cost[0] + train_schedules[line][time][1] * cost[1] + train_schedules[line][time][2] * cost[2]
 
 train = {
     line: partial(probability_cost, line) for line in train_schedules
 }
 
 # No cost to walk this edge of the graph
-walk = lambda: 0
+walk = lambda x: 0
 
 graph = {
     'START': {
@@ -45,7 +46,20 @@ graph = {
     'JUNC_7': {
         'LOC_4': walk,
         'JUNC_3': train['A'],
-    }
+    },
+    'LOC_1': {
+        'JUNC_3': walk
+    },
+    'LOC_2': {
+        'JUNC_5': walk
+    },
+    'LOC_3': {
+        'JUNC_6': walk
+    },
+    'LOC_4': {
+        'JUNC_7': walk
+    },
+
 }
 
 """
@@ -67,16 +81,28 @@ def find_all_routes(graph, start, end, route=[]):
 
 def get_optimal_routes(start, end):
     all_routes = find_all_routes(graph, start, end)
-    print(all_routes)
+    #print(all_routes)
     shortest_route = None
     cheapest_route = None
-    return {
-        'shortest': shortest_route,
-        'cheapest': cheapest_route
-    }
+
+    #Optimize for time
+    fastest = sorted(all_routes, key=get_time)[0]
+
+    for time in range(0, 8):
+        time_routes = get_cost(0, all_routes)
+        cheapest_route[time] = sorted(time_routes, key=0)
+
+
+
 
 def get_time(route):
-    pass 
+    return len(route) * 20
 
-def get_cost(route):
-    pass
+
+def get_cost(time, route):
+    for full_path in route:
+        path_cost = 0
+        for index, partial_path in enumerate(full_path[:-1]):
+            path_cost += graph[partial_path][full_path[index+1]](time)
+        print(full_path)
+        print(path_cost)
