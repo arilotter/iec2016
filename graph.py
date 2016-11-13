@@ -2,7 +2,7 @@ from schedules import costs, train_schedules
 from functools import partial
 
 def probability_cost(line, time):
-	return [sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for hour in train_schedules[line]]
+	return [sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for probabilities in train_schedules[line]]
 
 train = {
 	line: partial(probability_cost, line) for line in train_schedules
