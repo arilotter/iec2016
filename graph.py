@@ -3,6 +3,9 @@ from functools import partial
 from operator import itemgetter
 
 def probability_cost(line, time):
+"""
+Gets weighted average for the cost of the train
+"""
     cost = [2.00, 3.00, 4.00]
     return train_schedules[line][time][0] * cost[0] + train_schedules[line][time][1] * cost[1] + train_schedules[line][time][2] * cost[2]
 
@@ -13,6 +16,7 @@ train = {
 # No cost to walk this edge of the graph
 walk = lambda x: 0
 
+#Maps out the graph to use later
 graph = {
     'START': {
         'JUNC_1': walk,
@@ -80,6 +84,10 @@ def find_all_routes(graph, start, end, route=[]):
                 routes.append(newroute)
     return routes
 
+"""
+   Searches through all possible paths
+   Finds most optimal paths
+"""
 def get_optimal_routes(start, end):
     all_routes = find_all_routes(graph, start, end)
     cheapest_route = []
@@ -96,11 +104,15 @@ def get_optimal_routes(start, end):
 
 
 
-
+"""
+   Gets the time for a specific route
+"""
 def get_time(route):
     return sum([0 if node == 'START' or node == 'END' else 1 for node in route[:-1]])
 
-
+"""
+   Gets the cost for a specific route
+"""
 def get_cost(time, route):
     paths = []
     for full_path in route:
