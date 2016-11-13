@@ -1,0 +1,59 @@
+{
+  "fastest":
+  {
+    "route":
+    [
+      {
+        "START": "START",
+        "END": "JUNCTION_1",
+        "TRAIN": "TRAIN_A",
+        "COST": 0.5
+      },
+      {
+        "START": "JUNCTION_1",
+        "END": "JUNCTION_2",
+        "TRAIN": "TRAIN_B",
+        "COST": 0.7
+      },
+      {
+        "START": "JUNCTION_2",
+        "END": "END",
+        "TRAIN": "TRAIN_A",
+        "COST": 0.1
+      }
+    ],
+
+    "time": 60,
+    "cost": 1.3
+  },
+
+
+  "cheapest":
+  {
+    "route":
+    [
+      {
+        "START": "START",
+        "END": "JUNCTION_2",
+        "TRAIN": "TRAIN_A",
+        "COST": 0.5
+      },
+      {
+        "START": "JUNCTION_1",
+        "END": "JUNCTION_3",
+        "TRAIN": "TRAIN_B",
+        "COST": 0.1
+      },
+      {
+        "START": "JUNCTION_2",
+        "END": "END",
+        "TRAIN": "TRAIN_A",
+        "COST": 0.7
+      }
+    ],
+
+    "time": 60,
+    "cost": 1.3
+  }
+
+}
