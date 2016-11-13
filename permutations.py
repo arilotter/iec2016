@@ -10,8 +10,10 @@ postroute = it.product(LOC, "END")
 full_permutations = [["START"] + list(route) + ["END"] for route in inroute]
 
 def get_optimal_route():
-    cheapest = cheapest_route()
-    fastest = get_fastest_route()
+    return {
+        "cheapest": cheapest_route(),
+        "fastest": get_fastest_route()
+    }
 
 def get_fastest_route():
     perm_routes = []
@@ -34,9 +36,9 @@ def cheapest_route():
         cost = 0
 
         for index in range(len(route)-1):
-            best = graph.get_optimal_routes(route[index], route[index+1])["cheapest"][time//60]
+            best = graph.get_optimal_routes(route[index], route[index+1])["cheapest"][time//3]
             cost += best["cost"]
-            time += best["time"] * 20
+            time += best["time"]
 
             #print("From %s to %s (time = %s, cost = %s): " % (route[index], route[index+1], time//60, cost))
         all_routes.append({"cost": cost, "time": time, "path": route})
