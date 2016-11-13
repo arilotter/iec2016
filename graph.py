@@ -1,5 +1,6 @@
 from schedules import costs, train_schedules
 from functools import partial
+from operator import itemgetter
 
 def probability_cost(line, time):
     cost = [2.00, 3.00, 4.00]
@@ -81,28 +82,31 @@ def find_all_routes(graph, start, end, route=[]):
 
 def get_optimal_routes(start, end):
     all_routes = find_all_routes(graph, start, end)
-    #print(all_routes)
-    shortest_route = None
-    cheapest_route = None
+    cheapest_route = []
 
     #Optimize for time
     fastest = sorted(all_routes, key=get_time)[0]
 
+    #Optimize for cheap
     for time in range(0, 8):
-        time_routes = get_cost(0, all_routes)
-        cheapest_route[time] = sorted(time_routes, key=0)
+        time_routes = get_cost(time, all_routes)
+        cheapest_route.append(sorted(time_routes, key=lambda x:x['cost'])[0])
+
+    return {"fastest": fastest, "cheapest": cheapest_route}
 
 
 
 
 def get_time(route):
-    return len(route) * 20
+    return sum([0 if node == 'START' or node == 'END' else 1 for node in route[:-1]])
 
 
 def get_cost(time, route):
+    paths = []
     for full_path in route:
         path_cost = 0
         for index, partial_path in enumerate(full_path[:-1]):
             path_cost += graph[partial_path][full_path[index+1]](time)
-        print(full_path)
-        print(path_cost)
+
+        paths.append({"cost": path_cost, "time": get_time(full_path), "path": full_path})
+    return paths
