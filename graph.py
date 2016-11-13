@@ -98,7 +98,7 @@ def get_optimal_routes(start, end):
 
 
 def get_time(route):
-    return len(route) * 20
+    return sum([0 if node == 'START' or node == 'END' else 1 for node in route])
 
 
 def get_cost(time, route):
