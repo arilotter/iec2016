@@ -9,12 +9,18 @@ postroute = it.product(LOC, "END")
 
 full_permutations = [["START"] + list(route) + ["END"] for route in inroute]
 
+"""
+   Get optimal route during a trip: Cheapest and Fastest
+"""
 def get_optimal_route():
     return {
         "cheapest": cheapest_route(),
         "fastest": get_fastest_route()
     }
 
+"""
+   Looks for Fastest route by itterating through permutations of locations
+"""
 def get_fastest_route():
     perm_routes = []
     for perm in full_permutations:
@@ -28,7 +34,9 @@ def get_fastest_route():
 # graph.get_optimal_routes("LOC_1", "LOC_2")
 
 
-
+"""
+   Looks for the Cheapest route by itterating through all routes
+"""
 def cheapest_route():
     all_routes = []
     for route in full_permutations:
