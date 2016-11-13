@@ -76,7 +76,9 @@ def get_optimal_routes(start, end):
 	}
 
 def get_time(route):
-	pass 
+	return len(route) * 20
 
 def get_cost(route):
-	pass
+	cost = 0
+	for path in route[:-1]:
+		cost += 0
