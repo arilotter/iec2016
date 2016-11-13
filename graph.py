@@ -92,7 +92,7 @@ def get_optimal_routes(start, end):
     for time in range(0, 8):
         time_routes = get_cost(0, all_routes)
         print(time_routes)
-        cheapest_route.append(sorted(time_routes.items, key=itemgetter("cost")))
+        cheapest_route.append(sorted(time_routes, key=lambda x:x['cost']))
 
 
 
