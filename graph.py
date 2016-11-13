@@ -48,11 +48,26 @@ graph = {
 	}
 }
 
-def get_all_routes(start, end, path=[]):
-	pass
+"""
+	A recursive approach to dijkstra's algorithm
+"""
 
+def find_all_routes(graph, start, end, route=[]):
+	route = route + [start]
+	if start == end:
+		return [route]
+	if not start in graph:
+		return []
+	routes = []
+	for node in graph[start]:
+		if node not in route:
+			newroutes = find_all_routes(graph, node, end, route)
+			for newroute in newroutes:
+				routes.append(newroute)
+	return routes
 def get_optimal_routes(start, end):
-	all_routes = get_all_routes(start, end)
+	all_routes = find_all_routes(graph, start, end)
+	print(all_routes)
 	shortest_route = None
 	cheapest_route = None
 	return {

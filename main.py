@@ -2,4 +2,4 @@
 
 import graph
 
-print(graph.train['A'](0))
+graph.get_optimal_routes('START', 'LOC_1')
