@@ -3,9 +3,9 @@ from functools import partial
 from operator import itemgetter
 
 def probability_cost(line, time):
-"""
-Gets weighted average for the cost of the train
-"""
+    """
+    Gets weighted average for the cost of the train
+    """
     cost = [2.00, 3.00, 4.00]
     return train_schedules[line][time][0] * cost[0] + train_schedules[line][time][1] * cost[1] + train_schedules[line][time][2] * cost[2]
 
@@ -68,9 +68,9 @@ graph = {
 }
 
 def find_all_routes(graph, start, end, route=[]):
-"""
-    A recursive approach to dijkstra's algorithm. Finds all the routes between two given nodes
-"""
+    """
+        A recursive approach to dijkstra's algorithm. Finds all the routes between two given nodes
+    """
     route = route + [start]
     if start == end:
         return [route]
@@ -86,10 +86,10 @@ def find_all_routes(graph, start, end, route=[]):
 
 
 def get_optimal_routes(start, end):
-"""
-   Searches through all possible paths
-   Finds most optimal paths
-"""
+    """
+       Searches through all possible paths
+       Finds most optimal paths
+    """
     all_routes = find_all_routes(graph, start, end)
     cheapest_route = []
 
@@ -107,16 +107,16 @@ def get_optimal_routes(start, end):
 
 
 def get_time(route):
-"""
-   Gets the time for a specific route
-"""
+    """
+       Gets the time for a specific route
+    """
     return sum([0 if node == 'START' or node == 'END' else 1 for node in route[:-1]])
 
 
 def get_cost(time, route):
-"""
-   Gets the cost for a specific route
-"""
+    """
+       Gets the cost for a specific route
+    """
     paths = []
     for full_path in route:
         path_cost = 0
