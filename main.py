@@ -23,6 +23,8 @@ for path in optimal["fastest"]:
     thetime += 0 if path == 'START' or path == 'END' else 20
 
 
+thetime = 0
+
 print("Cheapest solution: ")
 for path in optimal["cheapest"]["path"]:
 
