@@ -4,16 +4,13 @@
     stroke-width: 1.5px;
 }
 
-#fastest {
-    fill: green;
-}
-
 .F {
+    stroke-width: 3px;
     stroke: green;
 }
-
-.link.cheapest {
-    stroke-dasharray: 0,2 1;
+.C {
+    stroke-dasharray: 0 2 1;
+    stroke-width: 3px;
 }
 
 circle {
@@ -23,7 +20,7 @@ circle {
 }
 
 text {
-    font: 10px sans-serif;
+    font: 14px sans-serif;
     pointer-events: none;
     text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
 }
