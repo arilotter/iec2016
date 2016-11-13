@@ -2,8 +2,7 @@ from schedules import costs, train_schedules
 from functools import partial
 
 def probability_cost(line, time):
-	[sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for hour in train_schedules[line]]
-	
+	return [sum([costs[index] * probability for index, probability in enumerate(probabilities)]) for hour in train_schedules[line]]
 
 train = {
 	line: partial(probability_cost, line) for line in train_schedules
@@ -49,8 +48,11 @@ graph = {
 	}
 }
 
+def get_all_routes(start, end, path=[]):
+	pass
+
 def get_optimal_routes(start, end):
-	get_all_routes(start, end)
+	all_routes = get_all_routes(start, end)
 	shortest_route = None
 	cheapest_route = None
 	return {
@@ -59,7 +61,7 @@ def get_optimal_routes(start, end):
 	}
 
 def get_time(route):
-	return 
+	pass 
 
 def get_cost(route):
 	pass
