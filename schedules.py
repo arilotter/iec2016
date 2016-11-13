@@ -2,13 +2,6 @@ trainA = [
 	[0.2, 0.5, 0.3],
 	[0.3, 0.4, 0.3],
 	[0.4, 0.4, 0.2],
-	[0.5, 0.5, 0.1]
-]
-
-trainA = [
-	[0.2, 0.5, 0.3],
-	[0.3, 0.4, 0.3],
-	[0.4, 0.4, 0.2],
 	[0.5, 0.4, 0.1],
 	[0.6, 0.3, 0.1],
 	[0.6, 0.3, 0.1],
@@ -59,3 +52,9 @@ trainE = [
 	[0.4, 0.4, 0.2],
 	[0.2, 0.0, 0.8]
 ]
+
+def get_weighted_cost(train, time):
+    #Time is in hours from 9am
+    train_costs = [2.00, 3.00, 4.00]
+    return train[time][0] * train_costs[0] + train[time][1] * train_costs[1] + train[time][2] * train_costs[2]
+
